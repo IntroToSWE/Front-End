@@ -45,7 +45,12 @@ class libraryPlant(models.Model):
 
     def __str__(self):
         return self.name
-    
-    class User(models.Model):
-        Username = models.CharField(max_length=15)
-        Password = 
+
+
+#this is the user and I don't want to do fancy authentication lol unless someone else wants to do that
+class User(models.Model):
+    Username = models.CharField(max_length=15)
+    Password = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.Username

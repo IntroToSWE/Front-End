@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Home</title>
+    </head>
+    <body>
+        <h1>CREATE YOUR ACCOUNT DUDE</h1>
+        <p><a href="{% url 'homepage' %}">NAW I GOT AN ACCOUNT</a></p>
+        {% block content %}
+            <form method="POST">{% csrf_token %}
+                {{form.as_p}}
+                <button type="submit">CREATE</button>
+            </form>
+        {% endblock %}
+    </body>
+</html>
