@@ -5,7 +5,7 @@
     </head>
     <body>
         <h1>CREATE YOUR ACCOUNT DUDE</h1>
-        <p><a href="{% url 'homepage' %}">NAW I GOT AN ACCOUNT</a></p>
+        <p><a href="{% url 'index' %}">NAW I GOT AN ACCOUNT</a></p>
         {% block content %}
             <form method="POST">{% csrf_token %}
                 {{form.as_p}}
