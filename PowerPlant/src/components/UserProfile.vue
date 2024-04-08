@@ -21,13 +21,12 @@ import { ref } from 'vue';
 
 let userdata = ref([]);
 
+let UserID = sessionStorage.UserID;
+UserID = 2;
+
 function GetUserData() {
     const Getit = () => {
         let form = new FormData();
-
-
-        let UserID = 2;
-
         form.append("userID", String(UserID));
         axios.post('http://127.0.0.1:8000/getuserprofile/', form)
             .then(response => 
@@ -47,15 +46,10 @@ GetUserData();
 function UpdateUserData() {
     const Updateit = () => {
         let form = new FormData();
-        let UserID = sessionStorage.UserID;
         let first_name = (<HTMLInputElement>document.getElementById("first_name")).value;
         let last_name = (<HTMLInputElement>document.getElementById("last_name")).value;
         let email = (<HTMLInputElement>document.getElementById("email")).value;
         let password = (<HTMLInputElement>document.getElementById("password")).value;
-
-        UserID = 2;
-
-        
         form.append("userID", String(UserID));
         form.append("update", "update");
         if (first_name){
@@ -87,11 +81,6 @@ function UpdateUserData() {
 function DeleteUser() {
     const deleteit = () => {
         let form = new FormData();
-        let UserID = sessionStorage.UserID;
-
-        UserID = 2;
-
-        
         form.append("userID", String(UserID));
         form.append("delete", "delete");
         axios.post('http://127.0.0.1:8000/updateprofile/', form)
