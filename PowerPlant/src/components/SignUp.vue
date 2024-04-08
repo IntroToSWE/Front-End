@@ -37,7 +37,7 @@ function MakeNewUser() {
             },
             (error) =>
             {
-                alert(error.message);
+                alert(error.data);
             });
     };
     make();
