@@ -1,12 +1,16 @@
 <template>
     This is the signup page 
     <form>
+        first name:
+        <input type="text" id="first_name">
+        last name:
+        <input type="text" id="last_name">
         email:
         <input type="text" id="email">
         password:
         <input type="text" id="password">
     </form>
-    <button @click="attemptLogin">Login</button>
+    <button @click="MakeNewUser">Create User</button>
 </template>
 
 <script setup lang="ts">
@@ -15,25 +19,28 @@ import { ref } from 'vue';
 
 let UserID;
 
-function attemptLogin() {
-    const Login = () => {
+function MakeNewUser() {
+    const make = () => {
         let form = new FormData();
+        let first_name = (<HTMLInputElement>document.getElementById("first_name")).value;
+        let last_name = (<HTMLInputElement>document.getElementById("last_name")).value;
         let email = (<HTMLInputElement>document.getElementById("email")).value;
         let password = (<HTMLInputElement>document.getElementById("password")).value;
+        form.append("first_name", first_name);
+        form.append("last_name", last_name);
         form.append("email", email);
         form.append("password", password);
-        axios.post('', form)
+        axios.post('http://127.0.0.1:8000/signup/', form)
             .then(response => 
             {
-                UserID = response.data;
-                sessionStorage.setItem("UserID", UserID)
+                alert(response.data);
             },
             (error) =>
             {
                 alert(error.message);
             });
     };
-    Login();
+    make();
 };
 
 
