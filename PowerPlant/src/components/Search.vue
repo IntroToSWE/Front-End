@@ -2,6 +2,10 @@
     <div>
         <h1> CHECK OUT ALL THE PLANTS </h1>
         <li v-for="plant in plantData"><h1>{{ plant.fields.name }}</h1>
+            <p>{{ plant.fields.description }}</p>
+            <p>water: {{ plant.fields.water }}</p>
+            <p>sun: {{ plant.fields.sun }}</p>
+            <p>soil: {{ plant.fields }}</p>
             <button @click="AddPlant(plant.pk)">Add To Collection</button></li>
     </div>
     
