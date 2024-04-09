@@ -2,15 +2,15 @@
     This is the userplant page 
     <div>
         <h1> CHECK OUT ALL MY PLANTS </h1>
-        <li v-for="plant in plantData"><h1>{{ plant.fields.name }}</h1>
-            <p>{{ plant.fields.description }}</p>
-            <p>water: {{ plant.fields.water }}</p>
-            <p>sun: {{ plant.fields.sun }}</p>
-            <p>soil: {{ plant.fields.soil }}</p>
-            <p>size: {{ plant.fields.size }}</p>
-            <p>inside: {{ plant.fields.inside }}</p>
-            <p>fertilization: {{ plant.fields.fertilization }}</p>
-            <p>pet: {{ plant.fields.pet }}</p>
+        <li v-for="plant in plantData"><h1>{{ plant.name }}</h1>
+            <p>{{ plant.description }}</p>
+            <p>water: {{ plant.water }}</p>
+            <p>sun: {{ plant.sun }}</p>
+            <p>soil: {{ plant.soil }}</p>
+            <p>size: {{ plant.size }}</p>
+            <p>inside: {{ plant.inside }}</p>
+            <p>fertilization: {{ plant.fertilization }}</p>
+            <p>pet: {{ plant.pet }}</p>
             <button @click="DeletePlant(plant.pk)">Remove Plant</button></li>
     </div>
 </template>
@@ -28,11 +28,12 @@ let plantData = ref([]);
 
 function requestPlants(){
     const getplants = () => {
-        axios.get('http://127.0.0.1:8000/getmyplants/')
+        let form = new FormData();
+        form.append("userID", String(UserID));
+        axios.post('http://127.0.0.1:8000/getmyplants/', form)
         .then(response =>
             {
-                response.data.forEach( element => plantData.value.push(element))
-                console.log(response.data[0].fields.name)
+                plantData.value = response.data
             },
             (error) =>
             {

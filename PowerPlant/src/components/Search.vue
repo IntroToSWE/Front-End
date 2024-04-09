@@ -5,7 +5,7 @@
             <p>{{ plant.fields.description }}</p>
             <p>water: {{ plant.fields.water }}</p>
             <p>sun: {{ plant.fields.sun }}</p>
-            <p>soil: {{ plant.fields }}</p>
+            <p>soil: {{ plant.fields.soil }}</p>
             <button @click="AddPlant(plant.pk)">Add To Collection</button></li>
     </div>
     
@@ -25,8 +25,8 @@ let plantData = ref([]);
 function AddPlant(plantID){
     const DoThing = () => {
         let form = new FormData();
-        form.append("user", String(UserID));
-        form.append("plantID", String(plantID));
+        form.append("user_id", String(UserID));
+        form.append("plantID_id", String(plantID));
         form.append("alive", String(1));
         axios.post('http://127.0.0.1:8000/createplant/', form)
             .then(response => 

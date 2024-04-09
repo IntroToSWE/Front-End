@@ -11,7 +11,6 @@
 
 <script setup lang="ts">
 import axios from 'axios';
-import { ref } from 'vue';
 
 //create the userID variable
 let UserID;
@@ -41,6 +40,8 @@ function attemptLogin() {
 
                 //the userid is stored in session storage so we can access it everywhere (all pages)
                 sessionStorage.setItem("UserID", UserID)
+                console.log(UserID)
+                alert("Welcome In")
             },
                 //if an error is sent back then we alert the user
             (error) =>
