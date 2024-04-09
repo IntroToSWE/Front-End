@@ -17,8 +17,6 @@
 import axios from 'axios';
 import { ref } from 'vue';
 
-let UserID;
-
 function MakeNewUser() {
     const make = () => {
         let form = new FormData();

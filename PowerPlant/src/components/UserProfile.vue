@@ -1,5 +1,8 @@
 <template>
     This is the userprofile page 
+    <!--userdata is a json package of the user information, I wasn't able to figure out
+    how to take it apart and display it right. I hope you guys can figure it out. The
+    information in it is automatically updated when the user updates their information-->
     <p>WELCOME TO THE ACCOUNT PAGE {{ userdata }}</p>
     <form>
         edit user information:
@@ -22,6 +25,8 @@ import { ref } from 'vue';
 let userdata = ref([]);
 
 let UserID = sessionStorage.UserID;
+//becuase we don't got linking setup I'm using this placeholder integer for the account
+//take out the next line when we got that setup
 UserID = 2;
 
 function GetUserData() {
