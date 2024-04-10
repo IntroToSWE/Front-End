@@ -7,6 +7,7 @@
         <input type="text" id="password">
     </form>
     <button @click="attemptLogin">Login</button>
+    <a href="/SignUp">Create an Account</a>
 </template>
 
 <script setup lang="ts">
@@ -41,7 +42,7 @@ function attemptLogin() {
                 //the userid is stored in session storage so we can access it everywhere (all pages)
                 sessionStorage.setItem("UserID", UserID)
                 console.log(UserID)
-                alert("Welcome In")
+                window.location.href = "/UserPlant";
             },
                 //if an error is sent back then we alert the user
             (error) =>

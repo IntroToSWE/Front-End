@@ -3,7 +3,13 @@
     <!--userdata is a json package of the user information, I wasn't able to figure out
     how to take it apart and display it right. I hope you guys can figure it out. The
     information in it is automatically updated when the user updates their information-->
-    <p>WELCOME TO THE ACCOUNT PAGE {{ userdata }}</p>
+    <p>WELCOME TO THE ACCOUNT PAGE</p>
+    <p>first_name: {{ userdata[0].first_name }}</p>
+    <p>last_name: {{ userdata[0].last_name }}</p>
+    <p>email: {{ userdata[0].email }}</p>
+    <p>password: {{ userdata[0].password }}</p>
+    <a href="Search">view plant library</a>
+    <a href="UserPlant">view personal collection</a>
     <form>
         edit user information:
         first name:
@@ -25,9 +31,6 @@ import { ref } from 'vue';
 let userdata = ref([]);
 
 let UserID = sessionStorage.UserID;
-//becuase we don't got linking setup I'm using this placeholder integer for the account
-//take out the next line when we got that setup
-UserID = 2;
 
 function GetUserData() {
     const Getit = () => {
@@ -36,8 +39,7 @@ function GetUserData() {
         axios.post('http://127.0.0.1:8000/getuserprofile/', form)
             .then(response => 
             {
-                userdata.value.pop();
-                userdata.value.push(response.data);
+                userdata.value.push(response.data[0].fields);
             },
             (error) =>
             {
@@ -73,6 +75,9 @@ function UpdateUserData() {
             .then(response => 
             {
                 alert(response.data);
+                if (password){
+                    window.location.href = "../";
+                }
                 GetUserData();
             },
             (error) =>
@@ -92,6 +97,7 @@ function DeleteUser() {
             .then(response => 
             {
                 alert(response.data);
+                window.location.href = "../";
                 //TRANSPORT THE USER TO THE LANDING PAGE OR SOMETHING
             },
             (error) =>

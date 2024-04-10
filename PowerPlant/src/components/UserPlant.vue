@@ -2,6 +2,7 @@
     This is the userplant page 
     <div>
         <h1> CHECK OUT ALL MY PLANTS </h1>
+        click <a href="Search">here</a> to browse plants and add some to your collection!
         <li v-for="plant in plantData"><h1>{{ plant.name }}</h1>
             <p>{{ plant.description }}</p>
             <p>water: {{ plant.water }}</p>
@@ -12,6 +13,7 @@
             <p>fertilization: {{ plant.fertilization }}</p>
             <p>pet: {{ plant.pet }}</p>
             <button @click="DeletePlant(plant.pk)">Remove Plant</button></li>
+        <a href="UserProfile">view account page</a>
     </div>
 </template>
 
@@ -20,9 +22,6 @@ import axios from 'axios';
 import { ref } from 'vue';
 
 let UserID = sessionStorage.UserID;
-
-//ADDING PLACEHOLDER USER ID BECUASE PAGES AREN'T FULLY LINKED YET
-UserID = 2;
 
 let plantData = ref([]);
 

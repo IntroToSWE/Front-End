@@ -1,5 +1,6 @@
 <template>
     This is the signup page 
+    <a href="../">I already have an account</a>
     <form>
         first name:
         <input type="text" id="first_name">
@@ -32,6 +33,7 @@ function MakeNewUser() {
             .then(response => 
             {
                 alert(response.data);
+                window.location.href = "../";
             },
             (error) =>
             {
