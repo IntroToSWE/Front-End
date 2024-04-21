@@ -55,6 +55,7 @@ function DeletePlant(PlantID) {
             .then(response => 
             {
                 alert(response.data);
+                window.location.reload()
                 //TRANSPORT THE USER TO THE LANDING PAGE OR SOMETHING
             },
             (error) =>
