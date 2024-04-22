@@ -6,7 +6,7 @@
         password:
         <input type="text" id="password">
     </form>
-    <button @click="attemptLogin">Login</button>
+    <button v-on:click="attemptLogin()">Login</button>
     <a href="/SignUp">Create an Account</a>
 </template>
 
