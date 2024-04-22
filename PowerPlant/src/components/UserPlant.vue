@@ -12,6 +12,7 @@
             <p>inside: {{ plant.inside }}</p>
             <p>fertilization: {{ plant.fertilization }}</p>
             <p>pet: {{ plant.pet }}</p>
+            <p>alive: {{ plant.alive }}</p>
             <button v-on:click="DeletePlant(plant.plantID)">Remove Plant</button></li>
         <a href="UserProfile">view account page</a>
     </div>
