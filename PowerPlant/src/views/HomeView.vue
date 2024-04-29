@@ -3,7 +3,7 @@ import SignUp from '../components/SignUp.vue'
 </script>
 
 <template>
-  <main>
+  <main style="width: 100%">
     <SignUp />
   </main>
 </template>
