@@ -13,42 +13,6 @@
         <p>Don't have an account? <a href="/SignUp">Create an Account</a></p>
       </div>
     </div>
-  </template>
-  
-  <script setup lang="ts">
-  import axios from 'axios';
-  
-  let UserID;
-  
-  function attemptLogin() {
-    const login = () => {
-      const email = (document.getElementById("email") as HTMLInputElement).value;
-      const password = (document.getElementById("password") as HTMLInputElement).value;
-  
-      const formData = new FormData();
-      formData.append("email", email);
-      formData.append("password", password);
-  
-      axios.post('http://127.0.0.1:8000/login/', formData)
-        .then(response => {
-          UserID = response.data;
-          sessionStorage.setItem("UserID", UserID);
-          console.log(UserID);
-          window.location.href = "/UserPlant";
-        })
-        .catch(error => {
-          alert(error.message);
-        });
-
-    This is the landing page 
-    <form>
-        email:
-        <input type="text" id="email">
-        password:
-        <input type="text" id="password">
-    </form>
-    <button v-on:click="attemptLogin()">Login</button>
-    <a href="/SignUp">Create an Account</a>
 </template>
 
 <script setup lang="ts">
@@ -74,7 +38,7 @@ function attemptLogin() {
 
         //axios.post means we use axios (imported above) and a POST method (send info to server)
         //goes to the address with the form we made
-        axios.post('http://127.0.0.1:8000/login/', form)
+        axios.post('http://ec2-3-14-13-63.us-east-2.compute.amazonaws.com:8000/login/', form)
             .then(response => 
             {
                 //if we get a response then its data only includes the userID of our user
@@ -91,7 +55,7 @@ function attemptLogin() {
                 alert(error.message);
             });
     };
-    login();
+    Login();
   };
   </script>
   
@@ -101,7 +65,7 @@ function attemptLogin() {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-image: url("C:\\Users\\jonah\\PowerPlant\\PowerPlant\\src\\assets\\images\\PlantBackground.jpg");
+    background-image: url("src/assets/images/PlantBackground.jpg");
     background-size: cover;
     background-position: center;
   }
