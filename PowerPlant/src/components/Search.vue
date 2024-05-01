@@ -1,16 +1,21 @@
 <template>
-    <div>
-        <h1> CHECK OUT ALL THE PLANTS </h1>
-        <a href="UserPlant">view personal collection</a>
-        <li v-for="plant in plantData"><h1>{{ plant.fields.name }}</h1>
-            <p>{{ plant.fields.description }}</p>
-            <p>water: {{ plant.fields.water }}</p>
-            <p>sun: {{ plant.fields.sun }}</p>
-            <p>soil: {{ plant.fields.soil }}</p>
-            <button @click="AddPlant(plant.pk)">Add To Collection</button></li>
-        <a href="UserProfile">view account page</a>
-    </div>
-    
+  <div class="container">
+    <h1 class="title">Plant Library</h1>
+    <router-link to="/userProfile" class="profile-link">View Account Page</router-link>
+    <router-link to="/userPlant" class="profile-link">View your personal collection!</router-link>
+    <ul class="plant-list">
+      <li v-for="plant in plantData" :key="plant.pk" class="plant-item">
+        <h2>{{ plant.fields.name }}</h2>
+        <p>{{ plant.fields.description }}</p>
+        <div class="plant-info">
+          <p><strong>Water:</strong> {{ plant.fields.water }}</p>
+          <p><strong>Sun:</strong> {{ plant.fields.sun }}</p>
+          <p><strong>Soil:</strong> {{ plant.fields.soil }}</p>
+        </div>
+        <button @click="addPlant(plant.pk)" class="add-btn">Add To Collection</button>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -21,7 +26,7 @@ let UserID = sessionStorage.UserID;
 
 let plantData = ref([]);
 
-function AddPlant(plantID){
+function addPlant(plantID){
     const DoThing = () => {
         let form = new FormData();
         form.append("user_id", String(UserID));
@@ -58,3 +63,68 @@ function requestPlants(){
 }
 requestPlants();
 </script>
+
+<style scoped>
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.title {
+  font-size: 32px;
+  margin-bottom: 10px;
+  display: flex; 
+  justify-content: center;
+}
+
+.subtitle {
+  font-size: 18px;
+  margin-bottom: 20px;
+  display: flex; 
+  justify-content: center;
+}
+
+.plant-list {
+  list-style: none;
+  padding: 0;
+}
+
+.plant-item {
+  margin-bottom: 30px;
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.plant-info {
+  margin-top: 10px;
+}
+
+.add-btn {
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.add-btn:hover {
+  background-color: #218838;
+}
+
+.profile-link {
+  display: flex;
+  margin: 10px 0 10px 0px;
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+  justify-content: center;
+}
+a { 
+    padding: 0 0 0 3px;
+}
+</style>

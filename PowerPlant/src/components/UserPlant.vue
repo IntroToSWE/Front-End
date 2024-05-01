@@ -1,21 +1,27 @@
 <template>
-    This is the userplant page 
-    <div>
-        <h1> CHECK OUT ALL MY PLANTS </h1>
-        click <a href="Search">here</a> to browse plants and add some to your collection!
-        <li v-for="plant in plantData"><h1>{{ plant.name }}</h1>
-            <p>{{ plant.description }}</p>
-            <p>water: {{ plant.water }}</p>
-            <p>sun: {{ plant.sun }}</p>
-            <p>soil: {{ plant.soil }}</p>
-            <p>size: {{ plant.size }}</p>
-            <p>inside: {{ plant.inside }}</p>
-            <p>fertilization: {{ plant.fertilization }}</p>
-            <p>pet: {{ plant.pet }}</p>
-            <p>alive: {{ plant.alive }}</p>
-            <button v-on:click="DeletePlant(plant.plantID)">Remove Plant</button></li>
-        <a href="UserProfile">view account page</a>
-    </div>
+  <div class="container">
+    <h1 class="title">Personal Collection</h1>
+    <router-link to="/userProfile" class="profile-link">View Account Page</router-link>
+    <router-link to="/search" class="profile-link">View the plant library!</router-link>
+    <ul class="plant-list">
+      <li v-for="plant in plantData" :key="plant.plantID" class="plant-item">
+        <h2>{{ plant.name }}</h2>
+        <p>{{ plant.description }}</p>
+        <div class="plant-info">
+          <p><strong>Water:</strong> {{ plant.water }}</p>
+          <p><strong>Sun:</strong> {{ plant.sun }}</p>
+          <p><strong>Soil:</strong> {{ plant.soil }}</p>
+          <p><strong>Size:</strong> {{ plant.size }}</p>
+          <p><strong>Inside:</strong> {{ plant.inside }}</p>
+          <p><strong>Fertilization:</strong> {{ plant.fertilization }}</p>
+          <p><strong>Pet:</strong> {{ plant.pet }}</p>
+          <p><strong>Alive:</strong> {{ plant.alive }}</p>
+        </div>
+        <button @click="deletePlant(plant.plantID)" class="remove-btn">Remove Plant</button>
+      </li>
+    </ul>
+    
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -45,7 +51,7 @@ function requestPlants(){
 }
 requestPlants();
 
-function DeletePlant(PlantID) {
+function deletePlant(PlantID) {
     const deleteit = () => {
         let form = new FormData();
         form.append("userID", String(UserID));
@@ -67,3 +73,68 @@ function DeletePlant(PlantID) {
     deleteit();
 };
 </script>
+
+<style scoped>
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.title {
+  font-size: 32px;
+  margin-bottom: 10px;
+  display: flex; 
+  justify-content: center;
+}
+
+.subtitle {
+  font-size: 18px;
+  margin-bottom: 20px;
+  display: flex; 
+  justify-content: center;
+}
+
+.plant-list {
+  list-style: none;
+  padding: 0;
+}
+
+.plant-item {
+  margin-bottom: 30px;
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.plant-info {
+  margin-top: 10px;
+}
+
+.remove-btn {
+  background-color: #ff6347;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.remove-btn:hover {
+  background-color: #cc4c38;
+}
+
+.profile-link {
+  display: flex;
+  margin: 10px 0 10px 0px;
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+  justify-content: center;
+}
+a { 
+    padding: 0 3px 0 3px;
+}
+</style>
