@@ -8,6 +8,7 @@
         <h2>{{ plant.name }}</h2>
         <p>{{ plant.description }}</p>
         <div class="plant-info">
+          <p><strong>Days to water:</strong> {{ plant.days_to_watered }}</p>
           <p><strong>Water:</strong> {{ plant.water }}</p>
           <p><strong>Sun:</strong> {{ plant.sun }}</p>
           <p><strong>Soil:</strong> {{ plant.soil }}</p>
@@ -15,9 +16,9 @@
           <p><strong>Inside:</strong> {{ plant.inside }}</p>
           <p><strong>Fertilization:</strong> {{ plant.fertilization }}</p>
           <p><strong>Pet:</strong> {{ plant.pet }}</p>
-          <p><strong>Alive:</strong> {{ plant.alive }}</p>
         </div>
         <button @click="deletePlant(plant.plantID)" class="remove-btn">Remove Plant</button>
+        <button @click="waterPlant(plant.plantID)" class="water-btn">Water Plant</button>
       </li>
     </ul>
     
@@ -72,6 +73,27 @@ function deletePlant(PlantID) {
     };
     deleteit();
 };
+function waterPlant(PlantID) {
+    const waterit = () => {
+        let form = new FormData();
+        form.append("userID", String(UserID));
+        form.append("plantID", String(PlantID));
+        form.append("alive", String(1));
+        form.append("watered", "watered");
+        axios.post('http://127.0.0.1:8000/updateplant/', form)
+            .then(response => 
+            {
+                alert(response.data);
+                window.location.reload()
+                //TRANSPORT THE USER TO THE LANDING PAGE OR SOMETHING
+            },
+            (error) =>
+            {
+                alert(error.message);
+            });
+    };
+    waterit();
+};
 </script>
 
 <style scoped>
@@ -114,6 +136,16 @@ function deletePlant(PlantID) {
 
 .remove-btn {
   background-color: #ff6347;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.water-btn {
+  background-color: greenyellow;
   color: #fff;
   border: none;
   padding: 8px 16px;
