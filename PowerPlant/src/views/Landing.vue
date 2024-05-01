@@ -2,14 +2,14 @@
 
     <div class="page-container">
       <div class="landing-container">
-        <h1>Welcome to Plant Tracker</h1>
+        <h1>Welcome to Plant Tracker!</h1>
         <form class="login-form">
           <label for="email">Email:</label>
           <input type="email" id="email" placeholder="Enter your email" required>
           <label for="password">Password:</label>
           <input type="password" id="password" placeholder="Enter your password" required>
-          <button @click="attemptLogin">Login</button>
         </form>
+        <button @click="attemptLogin">Login</button>
         <p>Don't have an account? <a href="/SignUp">Create an Account</a></p>
       </div>
     </div>
@@ -38,7 +38,7 @@ function attemptLogin() {
 
         //axios.post means we use axios (imported above) and a POST method (send info to server)
         //goes to the address with the form we made
-        axios.post('http://ec2-3-14-13-63.us-east-2.compute.amazonaws.com:8000/login/', form)
+        axios.post('http://127.0.0.1:8000/login/', form)
             .then(response => 
             {
                 //if we get a response then its data only includes the userID of our user
