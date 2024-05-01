@@ -3,6 +3,11 @@
     <h1 class="title">Plant Library</h1>
     <router-link to="/userProfile" class="profile-link">View Account Page</router-link>
     <router-link to="/userPlant" class="profile-link">View your personal collection!</router-link>
+    <div style="margin: 15px; margin-top: 35px !important">
+      <label for="search">Search: </label>
+      <input type="text" id="search" style="width: 300px; height: 30px; border-radius: 11px; border: 1px solid seagreen;">
+      <button @click="search()" class="add-btn">Filter</button>
+    </div>
     <ul class="plant-list">
       <li v-for="plant in plantData" :key="plant.pk" class="plant-item">
         <h2>{{ plant.fields.name }}</h2>
@@ -45,6 +50,27 @@ function addPlant(plantID){
     DoThing();
 }
 
+function search(){
+const getsearch = () => {
+        let form = new FormData();
+        let stringsearch = (<HTMLInputElement>document.getElementById("search")).value;
+        form.append("search", String(stringsearch))
+        axios.post('http://127.0.0.1:8000/getplantlibrary/', form)
+        .then(response =>
+            {
+                console.log(response.data)
+                plantData.value = []
+                response.data.forEach( element => plantData.value.push(element))
+                console.log(response.data)
+            },
+            (error) =>
+            {
+                alert(error.message);
+            }
+        )
+    };
+    getsearch();
+}
 function requestPlants(){
     const getplants = () => {
         axios.get('http://127.0.0.1:8000/getplantlibrary/')

@@ -41,10 +41,6 @@
                         </div>
                         <div style="margin: 15px; width:100%; display: flexbox;">
                             <p style="margin-left: 26px">Plants Owned: {{ totalUserPlants }}</p>
-                            <br>
-                            <p style="margin-left: 26px">Plants Alive: {{ totalAlivePlants }}</p>
-                            <br>
-                            <p style="margin-left: 26px">Plants Dead: {{ totalDeadPlants }}</p>
                         </div>
                     </div>
 

@@ -145,7 +145,7 @@ function waterPlant(PlantID) {
 }
 
 .water-btn {
-  background-color: greenyellow;
+  background-color: cornflowerblue;
   color: #fff;
   border: none;
   padding: 8px 16px;
