@@ -1,17 +1,16 @@
 <template>
-
     <div class="page-container">
       <div class="landing-container">
-        <h1>Welcome to Plant Tracker!</h1>
-        <form class="login-form">
-          <label for="email">Email:</label>
-          <input type="email" id="email" placeholder="Enter your email" required>
-          <label for="password">Password:</label>
-          <input type="password" id="password" placeholder="Enter your password" required>
-        </form>
-        <button @click="attemptLogin">Login</button>
-        <p>Don't have an account? <a href="/SignUp">Create an Account</a></p>
-      </div>
+            <h1>Welcome to Power Plant</h1>
+            <form class="login-form">
+                <label for="email">Email:</label>
+                <input type="email" id="email" placeholder="Enter your email" required>
+                <label for="password">Password:</label>
+                <input type="password" id="password" placeholder="Enter your password" required>
+            </form>
+            <button v-on:click="attemptLogin()">Login</button>
+            <p>Don't have an account? <a href="/SignUp">Create an Account</a></p>
+        </div>
     </div>
 </template>
 
@@ -65,7 +64,7 @@ function attemptLogin() {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-image: url("src/assets/images/PlantBackground.jpg");
+    background-image: url("../assets/images/PlantBackground.jpg");
     background-size: cover;
     background-position: center;
   }

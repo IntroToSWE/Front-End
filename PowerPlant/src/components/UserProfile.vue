@@ -9,7 +9,7 @@
                 <div style="padding: 3px 0 0 3px;">
                     <span class="material-symbols-outlined" style="color: burlywood">potted_plant</span>
                 </div>
-                <button style="border: none; margin: 5px; width: 175px; height: 30px; border-radius: 8px;">
+                <button class="profileButtons" style="border: none; margin: 5px; width: 250px; height: 35px; border-radius: 8px;">
                     <a href="Search" style="text-decoration: none; color: green">Go to Plant Library</a>
                 </button>
             </div>
@@ -17,27 +17,27 @@
                 <div style="padding: 10px 0 0 3px;">
                     <span class="material-symbols-outlined" style="color: burlywood">patient_list</span>
                 </div>
-                <button style="border: none; margin: 5px; width: 175px; height: 30px; border-radius: 8px;">
+                <button class="profileButtons" style="border: none; margin: 5px; width: 250px; height: 35px; border-radius: 8px;">
                     <a href="UserPlant" style="text-decoration: none; color: green;">Go to Personal Collection</a>
                 </button>
             </div>
         </div>
         <div class="right-side" style="min-width: 600px;">
             <div style="text-align: center; width: 100%">
-                <h1 style="text-align: center;"> User </h1>
+                <h1 style="text-align: center; margin-top: 30px; font-weight: bold;">My Account</h1>
             </div>
             <div style="width: 100%">
                 <form>
-                    <div style="margin: auto auto 50px 100px; display: flex; flex-wrap: wrap; justify-content: space-around;">
+                    <div style="margin: auto auto 50px 100px; display: flex; flex-wrap: wrap;">
                         <label style="display: inline-block; text-align: left; width: 100%">Profile Info</label>
                         <hr style="border: 1px solid lightgray; width: 100%;">
-                        <div style="margin: 15px; margin-top: 35px !important">
+                        <div style="margin: 15px; margin-top: 35px !important; margin-left: 40px !important;">
                             <label for="first_name">First Name </label>
-                            <input type="text" id="first_name" style="width: 300px; height: 30px; border-radius: 11px; border: 1px solid seagreen;":value=userdata[0].first_name>
+                            <input type="text" id="first_name" style="width: 300px; height: 30px; border-radius: 11px; border: 1px solid seagreen; padding-left: 5px; margin-left: 5px;":value=userdata[0].first_name>
                         </div>
                         <div style="margin: 15px; margin-top: 35px !important">
                             <label for="last_name" style="padding-right: 1px;">Last Name </label>
-                            <input type="text" id="last_name" style="width: 300px; height: 30px; border-radius: 11px; border: 1px solid seagreen" :value=userdata[0].last_name>
+                            <input type="text" id="last_name" style="width: 300px; height: 30px; border-radius: 11px; border: 1px solid seagreen; padding-left: 5px; margin-left: 5px;" :value=userdata[0].last_name>
                         </div>
                         <div style="margin: 15px; width:100%; display: flexbox;">
                             <p style="margin-left: 26px">Plants Owned: {{ totalUserPlants }}</p>
@@ -48,7 +48,7 @@
                         <label style="display: inline-block; text-align: left; width: 100%">Account Info</label>
                         <hr style="border: 1px solid lightgray; width: 100%;">
                         <div style="margin: 35px 15px 15px 40px; width: 100%;">
-                            <label for="email" style="padding-right: 38px;">Email </label>
+                            <label for="email" style="padding-right: 45px;">Email </label>
                             <input type="text" id="email" style="width: 300px; height: 30px; border-radius: 11px; border: 1px solid seagreen" :value=userdata[0].email>
                         </div>
                         <div style="margin: 15px 15px 15px 40px; width: 100%; display: flex;">
@@ -68,13 +68,13 @@
                     <hr style="border: 1px solid lightgray; width: 100%;">
                     <div style="display: flex; justify-content: space-evenly; margin: 25px 30% 10px 30%;">
                         <div style="height: 30px; display: flex; margin: 5px;">
-                            <button v-on:click="UpdateUserData()" style="height: inherit; color: steelblue; border: 0 solid red; border-radius: 15px;">Update Profile</button>
+                            <button class="profileButtons" v-on:click="UpdateUserData()" style="height: inherit; color: steelblue; border: 0 solid red; border-radius: 15px;">Update Profile</button>
                             <div style="padding: 3px 0 0 3px;">
                                 <span class="material-symbols-outlined" v-on:click="UpdateUserData()" style="color:steelblue">refresh</span>
                             </div>
                         </div>
                         <div style="height: 30px; display: flex; margin: 5px;">
-                            <button v-on:click="DeleteUser()" style="height: inherit; color: red; border: 0 solid red; border-radius: 15px;">Delete Account</button>
+                            <button class="profileButtons" v-on:click="DeleteUser()" style="height: inherit; color: red; border: 0 solid red; border-radius: 15px;">Delete Account</button>
                             <div style="padding: 3px 0 0 3px;">
                                 <span class="material-symbols-outlined" v-on:click="DeleteUser()" style="color: #D22B2B">delete</span>
                             </div>
@@ -169,7 +169,7 @@ function UpdateUserData() {
             {
                 alert(response.data);
                 if (password){
-                    window.location.href = "../";
+                    history.back();
                 }
                 GetUserData();
             },
@@ -294,5 +294,11 @@ input:checked + .slider:before {
 .user-profile-main-div {
     display: flex;
     background-color: rgb(234, 231, 224);
+}
+.profileButtons {
+    background-color: rgb(218, 218, 218);
+}
+.profileButtons:hover {
+    background-color: rgba(193, 193, 193, 0.611);
 }
 </style>

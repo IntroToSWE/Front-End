@@ -1,25 +1,37 @@
 <template>
-  <div class="container">
-    <h1 class="title">Plant Library</h1>
-    <router-link to="/userProfile" class="profile-link">View Account Page</router-link>
-    <router-link to="/userPlant" class="profile-link">View your personal collection!</router-link>
-    <div style="margin: 15px; margin-top: 35px !important">
-      <label for="search">Search: </label>
-      <input type="text" id="search" style="width: 300px; height: 30px; border-radius: 11px; border: 1px solid seagreen;">
-      <button @click="search()" class="add-btn">Filter</button>
+  <div class="outmost">
+    <div class="container">
+      <h1 class="title">Plant Library</h1>
+      <router-link to="/userProfile" class="profile-link">View Account Page</router-link>
+      <router-link to="/userPlant" class="profile-link">View your personal collection!</router-link>
+      <button class="logout-btn" v-on:click="Logout()">Log out</button>
+      <div style="margin: 15px; margin-top: 35px !important; margin-left: 150px !important">
+        <label for="search">Search: </label>
+        <input type="text" id="search" style="width: 300px; height: 30px; border-radius: 10px; border: 1px solid seagreen;">
+        <button @click="search()" class="fltr-btn">Filter</button>
+      </div>
+      <ul class="plant-list">
+        <li v-for="plant in plantData" :key="plant.pk" class="plant-item">
+
+          <!-- Start with new cards -->
+          <div class="card mb-0">
+            <img class="card-img-top" :src="'/src/assets/images/'+plant.fields.name+'.jpeg'" alt="image of a plant">
+            <div class="card-body">
+              <h5 class="card-title"></h5>
+              <h2>{{ plant.fields.name }}</h2>
+              <p>{{ plant.fields.description }}</p>
+              <div class="plant-info">
+                <p><strong>Water:</strong> {{ plant.fields.water }}</p>
+                <p><strong>Sun:</strong> {{ plant.fields.sun }}</p>
+                <p><strong>Soil:</strong> {{ plant.fields.soil }}</p>
+              </div>
+              <button @click="addPlant(plant.pk)" class="add-btn">Add To Collection</button>
+            </div>
+          </div>
+          <!-- End with new cards -->
+        </li>
+      </ul>
     </div>
-    <ul class="plant-list">
-      <li v-for="plant in plantData" :key="plant.pk" class="plant-item">
-        <h2>{{ plant.fields.name }}</h2>
-        <p>{{ plant.fields.description }}</p>
-        <div class="plant-info">
-          <p><strong>Water:</strong> {{ plant.fields.water }}</p>
-          <p><strong>Sun:</strong> {{ plant.fields.sun }}</p>
-          <p><strong>Soil:</strong> {{ plant.fields.soil }}</p>
-        </div>
-        <button @click="addPlant(plant.pk)" class="add-btn">Add To Collection</button>
-      </li>
-    </ul>
   </div>
 </template>
 
@@ -30,6 +42,12 @@ import { ref } from 'vue';
 let UserID = sessionStorage.UserID;
 
 let plantData = ref([]);
+let plants = ["PeaceLily"]
+
+
+let imagePath = "../assets/images/"
+let fileType = ".jpg"
+
 
 function addPlant(plantID){
     const DoThing = () => {
@@ -88,15 +106,23 @@ function requestPlants(){
     getplants();
 }
 requestPlants();
+
+function Logout() {
+  sessionStorage.clear();
+  window.location.href = "/"
+}
 </script>
 
 <style scoped>
+.outmost {
+  background-color: rgb(234, 231, 224);
+}
 .container {
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
+  align-items: center;
 }
-
 .title {
   font-size: 32px;
   margin-bottom: 10px;
@@ -121,7 +147,15 @@ requestPlants();
   border: 1px solid #ccc;
   padding: 20px;
   border-radius: 8px;
-  background-color: #f9f9f9;
+  background-color: rgb(234, 231, 224);
+  box-shadow: 0px 0px 10px 5px grey;
+  position: relative;
+  transition: all .3s ease-in-out
+}
+
+.plant-item:hover {
+  box-shadow: 0px 0px 20px 5px grey;
+  transform: translateY(-10px)
 }
 
 .plant-info {
@@ -132,13 +166,31 @@ requestPlants();
   background-color: #28a745;
   color: #fff;
   border: none;
-  padding: 8px 16px;
-  border-radius: 4px;
+  margin: 8px 0px;
+  border-radius: 10px;
+  width: 150px;
+  height: 30px;
   cursor: pointer;
   transition: background-color 0.3s;
 }
 
 .add-btn:hover {
+  background-color: #218838;
+}
+
+.fltr-btn {
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  margin: 8px 16px;
+  border-radius: 10px;
+  width: 90px;
+  height: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.fltr-btn:hover {
   background-color: #218838;
 }
 
@@ -152,5 +204,23 @@ requestPlants();
 }
 a { 
     padding: 0 0 0 3px;
+}
+/* .card-img-top {
+    width: 100% !important;
+    height: 20vw !important;
+    object-fit: cover !important;
+} */
+.logout-btn {
+  background-color: rgb(217, 217, 217);
+  color: #007bff;
+  width: 80px;
+  height: 30px;
+  border-radius: 15px;
+  border: none;
+  margin: 10px auto 10px 340px;
+  align-items: center;
+}
+.logout-btn:hover {
+  background-color: rgba(137, 155, 194, 0.5);
 }
 </style>

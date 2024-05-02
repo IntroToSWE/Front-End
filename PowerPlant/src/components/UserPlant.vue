@@ -1,27 +1,31 @@
+
+
 <template>
-  <div class="container">
-    <h1 class="title">Personal Collection</h1>
-    <router-link to="/userProfile" class="profile-link">View Account Page</router-link>
-    <router-link to="/search" class="profile-link">View the plant library!</router-link>
-    <ul class="plant-list">
-      <li v-for="plant in plantData" :key="plant.plantID" class="plant-item">
-        <h2>{{ plant.name }}</h2>
-        <p>{{ plant.description }}</p>
-        <div class="plant-info">
-          <p><strong>Days to water:</strong> {{ plant.days_to_watered }}</p>
-          <p><strong>Water:</strong> {{ plant.water }}</p>
-          <p><strong>Sun:</strong> {{ plant.sun }}</p>
-          <p><strong>Soil:</strong> {{ plant.soil }}</p>
-          <p><strong>Size:</strong> {{ plant.size }}</p>
-          <p><strong>Inside:</strong> {{ plant.inside }}</p>
-          <p><strong>Fertilization:</strong> {{ plant.fertilization }}</p>
-          <p><strong>Pet:</strong> {{ plant.pet }}</p>
-        </div>
-        <button @click="deletePlant(plant.plantID)" class="remove-btn">Remove Plant</button>
-        <button @click="waterPlant(plant.plantID)" class="water-btn">Water Plant</button>
-      </li>
-    </ul>
-    
+  <div class="outmost">
+    <div class="container">
+      <h1 class="title">Personal Collection</h1>
+      <router-link to="/userProfile" class="profile-link">View Account Page</router-link>
+      <router-link to="/search" class="profile-link">View the plant library!</router-link>
+      <button class="logout-btn" v-on:click="Logout()">Log out</button>
+      <ul class="plant-list">
+        <li v-for="plant in plantData" :key="plant.plantID" class="plant-item">
+          <h2>{{ plant.name }}</h2>
+          <p>{{ plant.description }}</p>
+          <div class="plant-info">
+            <p><strong>Days to water:</strong> {{ plant.days_to_watered }}</p>
+            <p><strong>Water:</strong> {{ plant.water }}</p>
+            <p><strong>Sun:</strong> {{ plant.sun }}</p>
+            <p><strong>Soil:</strong> {{ plant.soil }}</p>
+            <p><strong>Size:</strong> {{ plant.size }}</p>
+            <p><strong>Inside:</strong> {{ plant.inside }}</p>
+            <p><strong>Fertilization:</strong> {{ plant.fertilization }}</p>
+            <p><strong>Pet:</strong> {{ plant.pet }}</p>
+          </div>
+          <button @click="deletePlant(plant.plantID)" class="remove-btn">Remove Plant</button>
+          <button @click="waterPlant(plant.plantID)" class="water-btn">Water Plant</button>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -94,6 +98,10 @@ function waterPlant(PlantID) {
     };
     waterit();
 };
+function Logout() {
+  sessionStorage.clear();
+  window.location.href = "/"
+}
 </script>
 
 <style scoped>
@@ -168,5 +176,21 @@ function waterPlant(PlantID) {
 }
 a { 
     padding: 0 3px 0 3px;
+}
+.outmost {
+  background-color: rgb(234, 231, 224);
+}
+.logout-btn {
+  background-color: rgb(217, 217, 217);
+  color: #007bff;
+  width: 80px;
+  height: 30px;
+  border-radius: 15px;
+  border: none;
+  margin: 10px auto 10px 340px;
+  align-items: center;
+}
+.logout-btn:hover {
+  background-color: rgba(137, 155, 194, 0.5);
 }
 </style>
